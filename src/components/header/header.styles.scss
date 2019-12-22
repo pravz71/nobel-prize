@@ -1,0 +1,23 @@
+.header {
+	background-color: #24292e;
+	color: #fff;
+	margin-bottom: 48px;
+	padding: 12px 0;
+
+	.title {
+		font-size: 32px;
+		margin: 0;
+
+		span {
+			padding-left: 15px;
+		}
+
+	}
+
+	.subtitle {
+		color: #d4d4c6;
+		font-size: 16px;
+		font-weight: 500;
+		margin: 0;
+	}
+}
