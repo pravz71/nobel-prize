@@ -1,4 +1,13 @@
 import React from 'react';
+import {connect} from 'react-redux'; 
+
+import { getSearchResults } from '../../utils/utils';
+import {
+	addSearchQuery,
+	startFetchingData,
+	stopFetchingData,
+	addSearchResults
+} from '../../redux/search/search.actions';
 
 import './search-bar.styles.scss';
 
@@ -10,15 +19,22 @@ class SearchBar extends React.Component {
 	handleChange = (event) => {
 		const name = event.target.name;
 		const value = event.target.value;
-		console.log(event.target.value);
 		this.setState(() => ({
 			[name] : value
 		}));
 	}
 	
-	handleSubmit = (event) => {
+	handleSubmit = async (event) => {
 		event.preventDefault();
-		console.log(this.state.searchQuery);
+		this.props.addSearchQuery(this.state.searchQuery);
+		this.props.startFetchingData();
+		const searchResults = await getSearchResults(this.state.searchQuery);
+		this.props.stopFetchingData();
+		this.props.addSearchResults(searchResults);
+		this.setState(() => ({
+			searchQuery: ''
+		}));
+
 	}
 
 	render() {
@@ -46,4 +62,11 @@ class SearchBar extends React.Component {
 	}
 };
 
-export default SearchBar;
+const mapDispatchToProps = (dispatch) => ({
+	addSearchQuery: (searchQuery) => dispatch(addSearchQuery(searchQuery)),
+	startFetchingData: () => dispatch(startFetchingData()),
+	stopFetchingData: () => dispatch(stopFetchingData()),
+	addSearchResults: (searchResults) => dispatch(addSearchResults(searchResults))
+});
+
+export default connect(undefined, mapDispatchToProps)(SearchBar);

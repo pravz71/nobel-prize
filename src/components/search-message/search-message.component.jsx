@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import './search-message.styles.scss'
 
@@ -16,4 +17,9 @@ const SearchMessage = ({ totalResults, searchQuery }) => {
 	);
 };
 
-export default SearchMessage;
+const mapStateToProps = ({ search }) => ({
+	totalResults: search.searchResults.length,
+	searchQuery: search.searchQuery
+});
+
+export default connect(mapStateToProps)(SearchMessage);

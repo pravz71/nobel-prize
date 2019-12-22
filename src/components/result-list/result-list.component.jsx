@@ -1,14 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import SearchMessage from '../search-message/search-message.component';
 import Result from '../result/result.component';
 
 import './result-list.styles.scss';
 
-const ResultList = ({ searchResults = [] }) => {
+const ResultList = ({ searchResults }) => {
 	return (
 		<div className="results">
-			<SearchMessage totalResults={0} searchQuery={"Kazuo"} />
+			<SearchMessage />
 			<div className="result-list">
 				{
 					searchResults.map((result, index) => (
@@ -20,4 +21,8 @@ const ResultList = ({ searchResults = [] }) => {
 	);
 };
 
-export default ResultList;
+const mapStateToProps = (state) => ({
+	searchResults: state.search.searchResults
+});
+
+export default connect(mapStateToProps)(ResultList);
