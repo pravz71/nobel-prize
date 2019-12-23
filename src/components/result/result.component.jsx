@@ -8,8 +8,8 @@ const Result = ({ result }) => {
 		<div className="result">
 			<h3>{name}</h3>
 			<p>
-				<span>Field : {field}</span>
-				<span>Year: {year}</span>
+				Field : {field} &nbsp;
+				Year: {year}
 			</p>
 			<p>Country: {country}</p>
 			{

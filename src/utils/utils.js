@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const PRIZE_URL = `http://api.nobelprize.org/v1/prize.json`;
 const USER_URL = `http://api.nobelprize.org/v1/laureate.json`;
-const COUNTRY_URL = `http://api.nobelprize.org/v1/country.json`;
+// const COUNTRY_URL = `http://api.nobelprize.org/v1/country.json`;
 
 export const getPrizeData = async (laureatesData) => {
 	const response = await axios.get(PRIZE_URL);
@@ -18,8 +18,9 @@ export const getPrizeData = async (laureatesData) => {
 				match = true;
 				id = laureate.id;
 				// Removing the search result from the laureates
+			} else {
+				sharedWith.push(laureate.firstname + " " + laureate.surname);
 			}
-			sharedWith.push(laureate.firstname + " " + laureate.surname);
 		});
 
 		if(match) {

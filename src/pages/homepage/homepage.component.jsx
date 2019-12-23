@@ -13,7 +13,7 @@ const HomePage = ({ fetchingData }) => {
 			<Header />
 			<div className="container">
 				<SearchBar />
-				{fetchingData !== null && <ResultList />}
+				{fetchingData === false && <ResultList />}
 			</div>
 		</div>
 	);
